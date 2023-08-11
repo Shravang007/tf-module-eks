@@ -27,7 +27,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
 
 
 resource "aws_iam_role" "node-role" {
-  name = "eks-node-group-example"
+  name = "${var.env}-eks-node-group-role"
 
   assume_role_policy = jsonencode({
     Statement = [{
