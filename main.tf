@@ -12,7 +12,7 @@ resource "aws_eks_node_group" "nodes" {
   node_group_name = "${var.env}-ng"
   node_role_arn   = aws_iam_role.node-role.arn
   subnet_ids      = var.subnet_ids
-  capacity_types  = var.capacity_types
+  capacity_type  = var.capacity_type
   instance_types  = var.instance_types
 
   scaling_config {
