@@ -60,6 +60,39 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
 
 
 
+resource "aws_iam_policy" "sa-policy" {
+  name        = "eks-${var.env}-ssm-pm-policy"
+  path        = "/"
+  description = "eks-${var.env}-ssm-pm-policy"
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "VisualEditor0",
+        "Effect" : "Allow",
+        "Action" : [
+          "kms:Decrypt",
+          "ssm:GetParameterHistory",
+          "ssm:GetParametersByPath",
+          "ssm:GetParameters",
+          "ssm:GetParameter"
+        ],
+        "Resource" : [
+          "arn:aws:ssm:us-east-1:752442278108:parameter/roboshop.*",
+          "arn:aws:kms:us-east-1:752442278108:key/f0a71b80-90c3-4da1-a189-b4b95e9764e8"
+        ]
+      },
+      {
+        "Sid" : "VisualEditor1",
+        "Effect" : "Allow",
+        "Action" : "ssm:DescribeParameters",
+        "Resource" : "*"
+      }
+    ]
+  })
+}
+
 ## Iam Role
 
 resource "aws_iam_role" "sa-role" {
