@@ -1,6 +1,6 @@
 import re
 
-log = "arn:aws:kms:us-east-1:752442278108:key/f0a71b80-90c3-4da1-a189-b4b95e9764e8"
+log = "arn:aws:kms:us-east-1:752442278108:key"
 pattern = r'key/([0-9a-fA-F\-]+)'
 
 match = re.search(pattern, log)
